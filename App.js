@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, FlatList, Button, StyleSheet } from 'react-native';
+import { View, TextInput, FlatList, Button, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import ContactItem from './Contacts/ContactItem';
 import ContactModal from './Contacts/ContactModal';
+import ContactDetailsPopup from './Contacts/ContactDetailsPopup';
 import { getContacts, addContact, deleteContact } from './Contacts/ContactService';
 
 const App = () => {
@@ -27,7 +28,6 @@ const App = () => {
 
   const handleContactPress = (contact) => {
     setSelectedContact(contact);
-    setModalVisible(true);
   };
 
   const handleDeleteContact = (contactId) => {
@@ -46,11 +46,13 @@ const App = () => {
   };
 
   const renderContactItem = ({ item }) => (
-    <ContactItem
-      contact={item}
-      onPress={() => handleContactPress(item)}
-      onDelete={() => handleDeleteContact(item.id)}
-    />
+    <TouchableOpacity onPress={() => handleContactPress(item)}>
+      <ContactItem
+        contact={item}
+        onPress={() => handleContactPress(item)}
+        onDelete={() => handleDeleteContact(item.id)}
+      />
+    </TouchableOpacity>
   );
 
   const filteredContacts = contacts.filter((contact) =>
@@ -65,13 +67,18 @@ const App = () => {
         onChangeText={handleSearch}
         value={searchQuery}
       />
-      <Button title="Add Contact" onPress={() => setModalVisible(true)} />
       <FlatList
         data={filteredContacts}
         renderItem={renderContactItem}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.contactsList}
       />
+      {selectedContact && (
+        <ContactDetailsPopup contact={selectedContact} onClose={() => setSelectedContact(null)} />
+      )}
+      {!selectedContact && (
+        <Button title="Add Contact" onPress={() => setModalVisible(true)} />
+      )}
       <ContactModal
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
