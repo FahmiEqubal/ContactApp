@@ -61,12 +61,15 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search contacts"
-        onChangeText={handleSearch}
-        value={searchQuery}
-      />
+      <View style={styles.header}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search contacts"
+          onChangeText={handleSearch}
+          value={searchQuery}
+        />
+        <Button title="Add Contact" onPress={() => setModalVisible(true)} />
+      </View>
       <FlatList
         data={filteredContacts}
         renderItem={renderContactItem}
@@ -75,9 +78,6 @@ const App = () => {
       />
       {selectedContact && (
         <ContactDetailsPopup contact={selectedContact} onClose={() => setSelectedContact(null)} />
-      )}
-      {!selectedContact && (
-        <Button title="Add Contact" onPress={() => setModalVisible(true)} />
       )}
       <ContactModal
         visible={modalVisible}
@@ -103,13 +103,19 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 48,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
   searchInput: {
+    flex: 1,
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 8,
     paddingHorizontal: 16,
-    marginBottom: 16,
+    marginRight: 8,
   },
   contactsList: {
     flexGrow: 1,
