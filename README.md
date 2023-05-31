@@ -4,6 +4,15 @@ https://expo.dev/@equbalfahmi/ContactApp
 
 This is a simple mobile app developed using React Native for managing contacts. It allows users to view, add, and delete contacts on their phone.
 
+## APK Download
+
+You can download the latest APK of the Contacts App from the following link:
+
+https://expo.dev/artifacts/eas/83YKpuRR1XuKCTWVnQHEVo.apk
+
+**Note:** Make sure to enable installation from unknown sources on your Android device before installing the APK.
+
+
 ## Components
 
 The app consists of the following components:
