@@ -1,6 +1,6 @@
 # ContactApp
-open this link on your device:
-exp://exp.host/@equbalfahmi/ContactApp?release-channel=default
+open this link on your device to view App:
+https://expo.dev/@equbalfahmi/ContactApp
 
 This is a simple mobile app developed using React Native for managing contacts. It allows users to view, add, and delete contacts on their phone.
 
